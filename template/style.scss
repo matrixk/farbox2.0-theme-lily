@@ -354,12 +354,14 @@ a {
             max-width: 100px;
             margin: 2em auto;
         }
+        strong {
+            font-weight: $font-weight-medium;
+            background: $light-color;
+            padding: 0 4px;
+        }
         .strong-margin {
             margin: 0 2px;
             strong {
-                font-weight: $font-weight-medium;
-                background: $light-color;
-                padding: 0 4px;
                 -webkit-box-decoration-break: clone;
                 box-decoration-break: clone;
             }
@@ -1180,10 +1182,8 @@ iframe {
                     }
                 }
             }
-            .strong-margin {
-                strong {
-                    background: darken($light-color, 50%);
-                }
+            strong {
+                background: darken($light-color, 50%);
             }
             blockquote {
                 color: $light-grey;
