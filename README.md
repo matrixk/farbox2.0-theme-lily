@@ -1,4 +1,4 @@
-# farbox2.0 主题 「莉莉」
+# farbox 2.0 主题 「莉莉」
 
 基于Bitcron[同名主题](https://github.com/matrixk/bitcron-theme-lily)修改，适用于FarBox 2.0。
 
