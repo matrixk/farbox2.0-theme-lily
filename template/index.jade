@@ -1,0 +1,50 @@
+html
+	head
+		block title
+			if site.sub_title
+				title= site.title + ' - ' + site.sub_title
+			else
+				title= site.title
+		//meta(content='dark light', name='color-scheme')
+		+h.headers
+		+h.load('/template/style.scss')
+		+h.load("font")
+		link(href='https://fonts.googleapis.com/css?family=Noto+Serif+SC:400,600,800|Source+Code+Pro:200|Monsieur+La+Doulaise&display=swap', rel='stylesheet')
+
+	body
+		#pageSide
+			header
+				.siteTitleContainer
+					a.siteTitle(href="/")= site.title
+				.siteTextContainer
+					.siteText
+						span.special= "「" + site.sub_title + "」"
+						span= "观剧笔记，同人创作，翻译存档。同人女没有休班日！"
+						span= "ef / Assault Lily Project / 津港三部曲 / 花归葬。"
+						.siteCount
+							span= '本站共有%s篇文章，' %(d.get_data(types='post', return_count=true, with_page=false))　+ '总计%s字。' %('{0:,}'.format(site.text_words))
+					+site.just_nav
+
+		#pageMain
+			block main
+				article
+					ul
+						for post in posts
+							li
+								.metaitem
+									if post.category
+										a(href=post.category.url).articleCat= post.category.title
+									time(datetime= post.date.format('%Y-%m-%d'))= post.date.format('%Y/%m/%d')
+								a.articleTitle(href=post.url)= post.title
+					#pager
+						+h.paginator(style='mini', max_count='9')
+
+		script.
+			function myFunction() {
+				var x = document.getElementById("nav");
+				if (x.className === "topNav") {
+				x.className += " responsive";
+				} else {
+				x.className = "topNav";
+				}
+			}

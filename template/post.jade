@@ -1,0 +1,89 @@
+extends index
+
+block title
+	title= post.title + ' - ' + site.title
+
+block main
+	#postInner
+		.postMainTitle
+			.postTitleInner
+				h1= post.title
+			.postMeta
+				span= ('{0:,}'.format(post.text_words)) + '字'
+				if post.category
+					| •
+					a(href=post.category.url)= post.category.title
+				if post.tags
+					for tag in post.tags
+						| •
+						a(href='/tag/{{tag}}')= tag
+				| •
+				span= ('{0:,}'.format(post.visits or 0)) + '次阅读'
+				| •
+				time(datetime= post.date.format('%Y-%m-%d'))= post.date.format('%b %d, %Y')
+
+		if post.metadata.indent in ['yes', 'cancel','0', True]
+			+h.load("/template/indent.scss")
+		if post.metadata.password
+			include include/show_content.jade
+		else
+			post.content
+	
+		//if post.metadata.status not in ['page', 'Page']
+		#endTag
+			if post.metadata.tbc in ['yes', 'cancel','0', True]
+				span 未完待续
+			else
+				span End.
+		#copyright
+			span 本站所有文章除非特殊声明，均为原创。未经允许，一律不得转载、删改、二次上传。
+		if post.metadata.comment not in ['no', 'No', False]
+			+post.comments_as_html()
+	script.
+		$('table').wrap( '<p class="table-overflow"></p>' );
+	script.
+		$('strong').wrap( '<span class="strong-margin"></span>' );
+
+	script.
+		$('#pageMain #postInner p.md_block')
+		.each(function(i, el) {
+			var first = $(el).children().first();
+			var matches = first.text().match(/^\{\{(!)?(.*)\}\}$/);
+			if (!matches) return;
+			first.remove();
+			var legend = $('<p class="md_compiled md_paragraph_html"><legend class="foldup-caption" style="cursor:hand" onclick="$(this).parent().next().toggle()"></legend></p>').children().text(matches[2]).end();
+
+			var div = $('<div class="foldup"></div>').toggle(!!matches[1]);
+			$(el).children().each(function() {
+				div.append('<p>' + this.innerHTML + '</p>');
+			});
+
+			$(el).before(legend, div).remove();
+		})
+		.each(function(i, el) {
+			var first = $(el).children().first();
+			if (first.text() !== '!Warning') return;
+			first.remove();
+			$(el).hide().addClass('warning').show(); // to avoid transition problems
+		});
+
+	script.
+		$('iframe').not('[height],[width]').each(function() {
+			$(this).parent().is('div.aspect-ratio') || $(this).wrap('<div class="aspect-ratio"></div>');
+		});
+
+	if post.metadata.formula in ['yes','Yes','1','enable', True]
+		script(src='/fb_static/lib/markdown/MathJax/MathJax.js?config=TeX-AMS_HTML-full.js').
+			MathJax.Hub.Config({
+			tex2jax: {
+			inlineMath: [ ['$','$']],
+			displayMath: [ ['$$','$$'] ]
+			},
+			"HTML-CSS": {
+			imageFont: null,
+			availableFonts: ["TeX"],
+			preferredFont: "TeX"
+			},
+			extensions: ["jsMath2jax.js", 'tex2jax.js', 'MatchWebFonts.js'],
+			messageStyle: "none"
+			});

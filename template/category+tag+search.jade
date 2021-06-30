@@ -1,0 +1,28 @@
+extends index
+
+block title
+	if request.path.startswith('/category/') or request.path.startswith('/tag/')
+		title= request.get_offset_path(1) + ' - ' + site.title
+	else
+		title= site.title
+
+block main
+	#postInner
+		.catLabel
+			if request.path.startswith('/category/') or request.path.startswith('/tag/')
+				span= '「' + request.get_offset_path(1) + '」' + '下的文章'
+			elif request.args.s
+				span= '「' + request.args.s + '」' + '搜索到的文章'
+
+		.catMainTitle
+			for post in posts
+				.postTitleInner
+					a(href=post.url)= post.title
+					if post.metadata.summary
+						.summary= post.metadata.summary
+					else
+						.summary= post.content.limit(words=120).no_pic.plain
+					time(datetime= post.date.format('%Y-%m-%d'))= post.date.format('%Y/%m/%d')
+
+		#pager
+			+h.paginator(style='mini', max_count='9')

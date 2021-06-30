@@ -1,0 +1,61 @@
+extends index
+
+block title
+	title= '归档 - ' + site.title
+
+block main
+	#postInner
+		entries = d.get_data(types='post', limit=25, sort='desc').group('-date:year')
+		for year, year_posts in entries
+			year_start_date = '%s-1-1' %year
+			year_end_date = '%s-1-1' %(year.int+1)
+			yearly_count = d.get_data(types='post', return_count=true, date_start=year_start_date, date_end=year_end_date)
+			.archiveBlock
+				.postMainTitle
+					.postTitleInner
+						h1= year
+					.postMeta
+						span= '%s篇文章' %yearly_count
+	
+				#archiveList
+					ul
+						for post in year_posts
+							li
+								.metaitem
+									if post.category
+										a(href=post.category.url).articleCat= post.category.title
+									time(datetime= post.date.format('%Y-%m-%d'))= post.date.format('%Y/%m/%d')
+								a.articleTitle(href=post.url)= post.title
+
+		#pager
+			+h.paginator(style='mini', max_count='8')
+
+		#categories
+			.cat-label
+				span.special= "长篇"
+				span= "翻译工程"
+			.cat-box
+				a(href='/fan-yi/translation-index-hanakisou-psp')
+					span.cat-title= '花归葬 PSP'
+				a(href='/fan-yi/translation-index-assaultlily-last-bullet')
+					span.cat-title= 'Assault Lily Last Bullet'
+			if posts.categories
+				.cat-label
+					span= "按"
+					span.special= "分类"
+					span= "检索"
+				.cat-box
+					for category in posts.categories
+						a(href=category.url)
+							span.cat-title= category.title
+							span.cat-count= category.posts_count
+			if site.tags
+				.cat-label
+					span= "按"
+					span.special= "标签"
+					span= "检索"
+				.cat-box
+					for tag_name, tag_count in site.tags[:30]
+						a(href='/tag/{{tag_name}}')
+							span.cat-title= tag_name
+							span.cat-count= tag_count
