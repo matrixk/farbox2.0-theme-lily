@@ -41,8 +41,10 @@ block main
 			+post.comments_as_html()
 	script.
 		$('table').wrap( '<p class="table-overflow"></p>' );
-	script.
 		$('strong').wrap( '<span class="strong-margin"></span>' );
+	script.
+		$('input.email_input').attr("placeholder","邮箱（不会显示）");
+		$('input.site_input').attr("placeholder","网站（非必填）");
 
 	script.
 		$('#pageMain #postInner p.md_block')

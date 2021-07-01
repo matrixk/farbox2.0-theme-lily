@@ -262,7 +262,6 @@ a {
             border: $light-grey 1px solid;
             font-size: small;
             text-align: center;
-            border-radius: 5px;
             -webkit-user-select: none;
                -moz-user-select: none;
                 -ms-user-select: none;
@@ -875,6 +874,7 @@ a {
         display: none;
     }
     #new_comment_form {
+        border-top: $grey 1px dotted!important;
         .comment_trigger {
             position: relative!important;
             left: 19px;
@@ -889,7 +889,8 @@ a {
         .comment {
             padding: 2em 0 0 0!important;
             border: unset!important;
-            border-top: 1px solid rgba(150, 150, 150, 0.18)!important;
+            border-radius: unset!important;
+            border-top: $grey 1px dotted!important;
             background-color: unset!important;
             .author {
                 b {
@@ -1070,6 +1071,7 @@ iframe {
     
     #pageSide {
         header {
+            border-top: $light-grey 1px dotted;
             .siteTitleContainer {
                 .siteTitle {
                     color: $white;
@@ -1144,6 +1146,7 @@ iframe {
         #postInner {
             color: $white;
             .postMainTitle {
+                border-bottom: $light-grey 1px dotted;
                 .postTitleInner {
                     h1 {
                         &::after {
@@ -1282,6 +1285,7 @@ iframe {
     }
     .doc_comments {
         #new_comment_form {
+            border: $light-grey 1px dotted!important;
             background-color: lighten($black, 15%)!important;
             color: darken($white, 25%)!important;
             .textarea_box {
@@ -1290,6 +1294,7 @@ iframe {
         }
         .comments {
             .comment {
+                border-top: $light-grey 1px dotted!important;
                 .author {
                     b {
                         color: $white!important;
