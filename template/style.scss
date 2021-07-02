@@ -874,7 +874,7 @@ a {
         display: none;
     }
     #new_comment_form {
-        border-top: $grey 1px dotted!important;
+        border: $light-grey 1px solid!important;
         .comment_trigger {
             position: relative!important;
             left: 19px;
@@ -890,7 +890,7 @@ a {
             padding: 2em 0 0 0!important;
             border: unset!important;
             border-radius: unset!important;
-            border-top: $grey 1px dotted!important;
+            border-top: $light-grey 1px solid!important;
             background-color: unset!important;
             .author {
                 b {
