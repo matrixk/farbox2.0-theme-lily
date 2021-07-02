@@ -154,7 +154,7 @@ a {
                         padding: 0 7px 2px 7px;
                         display: inline-block;
                         line-height: 1.5;
-                        border: $light-color 1px dotted;
+                        border: $dark-color 1px dotted;
                         border-radius: 10px;
                         transition: $transition;
                         &:hover {
@@ -655,7 +655,7 @@ a {
                                 padding: 0 7px 2px 7px;
                                 display: inline-block;
                                 line-height: 1.5;
-                                border: $light-color 1px dotted;
+                                border: $dark-color 1px dotted;
                                 border-radius: 10px;
                                 transition: $transition;
                                 &:hover {
