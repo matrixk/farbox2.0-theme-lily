@@ -4,7 +4,7 @@ $grey: darken($light-grey, 60%);
 $black: #000000;
 $light-color: #98d1ff;
 $dark-color: darken($light-color, 30%);
-$decorate-color: #f0fe11;
+$decorate-color: #f7fd10;
 $line-height: 2;
 $transition: all 0.5s;
 $font-family-cursive: 'Monsieur La Doulaise', cursive;
@@ -360,6 +360,7 @@ a {
         }
         .strong-margin {
             margin: 0 2px;
+            -webkit-box-decoration-break: clone;
             strong {
                 -webkit-box-decoration-break: clone;
                 box-decoration-break: clone;
@@ -426,6 +427,15 @@ a {
                 }
             }
         }
+        img {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            max-width: 100%;
+            margin: 0 auto;
+        }
         .md_figure.md_image_figure {
             -webkit-user-select: none;
                -moz-user-select: none;
@@ -437,15 +447,6 @@ a {
             max-width: 98%;
             width: max-content;
             box-shadow: 0 0 10px $light-grey;
-            img {
-                -webkit-touch-callout: none;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-                max-width: 100%;
-                margin: 0 auto;
-            }
             figcaption {
                 text-align: center;
                 font-style: italic;
@@ -482,10 +483,9 @@ a {
                 user-select: none;
             float: right;
             margin: 0 0 1em 1em;
-            max-width: 300px;
+            max-width: 500px;
             border: $grey 1px dotted;
             border-radius: 5px;
-            background: $white;
             padding: 0em 2em 0em 1em;
             ul {
                 list-style: circle;
@@ -500,12 +500,12 @@ a {
             padding: 0.5em 1em;
             font-size: 0.9em;
             font-weight: $font-weight-medium;
-            span {
+            .strong-margin {
+                margin: 0;
                 strong {
-                    background: unset;
+                    background: linear-gradient(to top, $decorate-color, $decorate-color 30%, transparent 30%) no-repeat;
                     font-weight: $font-weight-heavy;
-                    padding: 0 0;
-                    margin: 0 0;
+                    padding: 0;
                 }
             }
         }
@@ -521,7 +521,6 @@ a {
             padding: 0 1em;
             border: $grey 1px dotted;
             font-size: 0.85em;
-            background: $white;
             -webkit-transition: $transition;
             -o-transition: $transition;
             transition: $transition;
@@ -531,7 +530,6 @@ a {
         }
         .foldup {
             font-size: 0.9em;
-            background: $white;
             padding: 1em 1.5em;
             border-top: $grey 1px dotted;
             border-bottom: $grey 1px dotted;
@@ -1207,9 +1205,25 @@ iframe {
                   filter: brightness(1);
                 }
             }
+            .toc {
+            border: $light-grey 1px dotted;
+                a {
+                    color: $light-grey;
+                }
+            }
             .warning {
                 color: $white;
                 background: darken($light-color, 60%);
+                .strong-margin {
+                    strong {
+                        background: linear-gradient(to top, darken($decorate-color, 25%), darken($decorate-color, 25%) 30%, transparent 30%) no-repeat;
+                    }
+                }
+            }
+            .foldup-caption {
+                &:hover {
+                    background: darken($light-color, 30%);
+                }
             }
             #copyright {
                 color: $light-grey;

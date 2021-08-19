@@ -39,8 +39,10 @@ block main
 			span 本站所有文章除非特殊声明，均为原创。未经允许，一律不得转载、删改、二次上传。
 		if post.metadata.comment not in ['no', 'No', False]
 			+post.comments_as_html()
+
 	script.
 		$('table').wrap( '<p class="table-overflow"></p>' );
+	script.
 		$('strong').wrap( '<span class="strong-margin"></span>' );
 	script.
 		$('input.email_input').attr("placeholder","邮箱（不会显示）");
