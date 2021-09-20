@@ -8,9 +8,9 @@ html
 		//meta(content='dark light', name='color-scheme')
 		+h.headers
 		+h.load('/template/style.scss')
-		//+h.load('/template/include/jquery-3.6.0.min.js')
+		+h.load('jquery')
 		+h.load("font")
-		link(href='https://fonts.googleapis.com/css?family=Noto+Serif+SC:400,600,800|Source+Code+Pro:200|Monsieur+La+Doulaise&display=swap', rel='stylesheet')
+		link(href='https://fonts.googleapis.com/css?family=Noto+Serif+SC:400,600,800|Source+Code+Pro:200|Long+Cang&display=swap', rel='stylesheet')
 
 	body
 		#pageSide
@@ -20,7 +20,7 @@ html
 				.siteTextContainer
 					.siteText
 						span.special= "「" + site.sub_title + "」"
-						span= "想写啥写啥"
+						span= site.description
 						.siteCount
 							span= '本站共有%s篇文章，' %(d.get_data(types='post', return_count=true, with_page=false))　+ '总计%s字。' %('{0:,}'.format(site.text_words))
 					+site.just_nav
